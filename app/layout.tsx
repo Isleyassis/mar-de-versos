@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Mar de Versos | Entre poemas e paixões',
+  title: 'Mar de Versos | Entre poemas, orações e paixões',
   description: 'Um mar de versos onde sentimentos, memórias e paixões encontram as palavras.',
   icons: {
     icon: '/favicon.ico',
