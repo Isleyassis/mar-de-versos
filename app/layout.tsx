@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-
+  metadataBase: new URL('https://mar-de-versos.vercel.app'),
   openGraph: {
     title: 'Mar de Versos | Entre poemas, orações e paixões',
     description:
