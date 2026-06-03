@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+
+  openGraph: {
+    title: 'Mar de Versos | Entre poemas, orações e paixões',
+    description:
+      'Um mar de versos onde sentimentos, memórias e paixões encontram as palavras.',
+    images: [
+      {
+        url: '/mar-de-versos-og-image.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Mar de Versos',
+      },
+    ],
+  },
 }
 
 export const viewport: Viewport = {
