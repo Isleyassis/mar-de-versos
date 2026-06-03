@@ -59,14 +59,20 @@ export const moments: Moment[] = [
   {
     id: "1",
     title: "Dia que nos conhecemos",
-    description: "Aquele dia mágico em que nossos caminhos se cruzaram pela primeira vez. O início de tudo.",
-    date: "2026-05-09",
+    description: "O dia em que uma simples mensagem acabou mudando muita coisa. Sem imaginar, ali começava a nossa história.",
+    date: "2026-05-09T12:00:00",
   },
   {
     id: "2",
     title: "Nosso primeiro encontro",
-    description: "O dia em que tudo começou. Aquele açai que mudou nossas vidas para sempre.",
-    date: "2026-05-23",
+    description: "O dia do nosso primeiro açaí juntos, das primeiras risadas cara a cara e da certeza de que eu queria viver mais momentos ao seu lado.",
+    date: "2026-05-23T12:00:00",
+  },
+  {
+    id: "3",
+    title: "Nosso primeiro beijo",
+    description: "Depois de tanta ansiedade, aconteceu. Um beijo que fez o mundo parecer um pouco mais leve e que eu vou guardar para sempre na memória.",
+    date: "2026-06-03T12:00:00",
   },
 ]
 

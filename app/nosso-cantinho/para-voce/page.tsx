@@ -21,7 +21,7 @@ export default function ForYouPage() {
             </div>
           </div>
 
-          <div className="space-y-5 font-serif leading-8 text-lg text-muted-foreground">
+          <div className="space-y-5 font-serif leading-8 text-lg text-red-600">
             <p>
               Em um mar de dias monótonos, pintados em tons de cinza,
               você apareceu trazendo cor, leveza e alegria para tudo ao seu redor.

@@ -17,6 +17,7 @@ import {
 import { moments as initialMoments, type Moment } from "@/lib/data"
 
 export default function MomentosPage() {
+  
   const [moments, setMoments] = useState<Moment[]>(initialMoments)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [editingMoment, setEditingMoment] = useState<Moment | null>(null)
@@ -66,8 +67,28 @@ export default function MomentosPage() {
     setMoments(moments.filter(m => m.id !== id))
   }
 
-  const sortedMoments = [...moments].sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
+  const formatDate = (dateString: string) => {
+    const [datePart] = dateString.split("T")
+    const [year, month, day] = datePart.split("-").map(Number)
+
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(year, month - 1, day))
+  } 
+
+  const parseLocalDate = (dateString: string) => {
+    const [datePart] = dateString.split("T")
+    const [year, month, day] = datePart.split("-").map(Number)
+
+    return new Date(year, month - 1, day)
+  }
+
+  const sortedMoments = [...moments].sort(
+    (a, b) =>
+      parseLocalDate(a.date).getTime() -
+      parseLocalDate(b.date).getTime()
   )
 
   return (
@@ -77,59 +98,6 @@ export default function MomentosPage() {
           <h1 className="font-serif text-2xl font-medium sm:text-3xl">Nossos Momentos</h1>
           <p className="mt-1 text-muted-foreground">Os marcos especiais da nossa história</p>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={() => handleOpenDialog()}>
-              <Plus className="mr-2 h-4 w-4" />
-              Novo Momento
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className="font-serif">
-                {editingMoment ? "Editar Momento" : "Novo Momento"}
-              </DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4 pt-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Título</Label>
-                <Input
-                  id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Ex: Nosso primeiro encontro"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="date">Data</Label>
-                <Input
-                  id="date"
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description">Descrição</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Descreva esse momento especial..."
-                  rows={3}
-                />
-              </div>
-              <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-                  Cancelar
-                </Button>
-                <Button onClick={handleSave}>
-                  {editingMoment ? "Salvar" : "Criar"}
-                </Button>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
 
       {/* Timeline */}
@@ -158,32 +126,10 @@ export default function MomentosPage() {
                       <div className={index % 2 === 0 ? "sm:text-right" : ""}>
                         <time className="flex items-center gap-1 text-xs font-medium text-primary">
                           <Calendar className="h-3 w-3" />
-                          {new Date(moment.date).toLocaleDateString("pt-BR", { 
-                            day: "numeric", 
-                            month: "long", 
-                            year: "numeric" 
-                          })}
+                          {formatDate(moment.date)}
                         </time>
                         <h3 className="mt-2 font-serif text-lg font-medium">{moment.title}</h3>
                         <p className="mt-1 text-sm text-muted-foreground">{moment.description}</p>
-                      </div>
-                      <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
-                          className="h-8 w-8"
-                          onClick={() => handleOpenDialog(moment)}
-                        >
-                          <Pencil className="h-3 w-3" />
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
-                          className="h-8 w-8 text-destructive"
-                          onClick={() => handleDelete(moment.id)}
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
                       </div>
                     </div>
                   </CardContent>
